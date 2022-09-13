@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "StemJoker",
-    "slug": "StemJoker",
+    "slug": "stemjoker",
+    "owner": "lelandlong",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
