@@ -8,10 +8,10 @@ export const SettingsScreen = ({ navigation }) => {
   // - - - - - - - - - -
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "grey" }}>
       <View style={styles.container}>
         <Text> </Text>
-        <Text>Settings</Text>
+        <Text style={styles.text}>Settings</Text>
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
@@ -23,8 +23,12 @@ export const SettingsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "yellowgreen",
+    color: "white",
     alignItems: "center",
     justifyContent: "center",
+  },
+  text: {
+    color: "white",
   },
 });

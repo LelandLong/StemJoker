@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { HomeNavigator } from "../navigators/home.navigator";
 import { SettingsScreen } from "../screens/settings.screen";
+
+import stemLogo from "../assets/stemLogo.png";
 
 // - - - - - - - - - - - - - - - - - - - -
 
@@ -42,6 +45,17 @@ const createScreenOptions = ({ route }) => {
 export const AppNavigator = () => {
   // - - - - - - - - - -
 
+  // ORIGINAL
+  // return (
+  //   <View style={styles.container}>
+  //     <Image source={stemLogo} style={{ width: 317, height: 309 }} />
+  //     <Text> </Text>
+  //     <Text>Open up App.js to start working on your app!</Text>
+  //     <StatusBar style="auto" />
+  //   </View>
+  // );
+
+  // TABS
   return (
     <NavigationContainer>
       <Tab.Navigator backBehavior="history" screenOptions={createScreenOptions}>

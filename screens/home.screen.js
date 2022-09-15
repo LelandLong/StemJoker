@@ -18,6 +18,7 @@ export const HomeScreen = ({ navigation }) => {
 
   // - - - - - - - - - -
 
+  // HEADER TITLE
   useEffect(() => {
     console.log("home.screen[useEffect] triggered...");
     navigation.setOptions({ title: "Stem Jokes" });
@@ -25,6 +26,16 @@ export const HomeScreen = ({ navigation }) => {
 
   // - - - - - - - - - -
 
+  // return (
+  //   <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+  //     <View style={styles.container}>
+  //       <Text>Hi, I'm the Home Screen</Text>
+  //       <StatusBar style="auto" />
+  //     </View>
+  //   </SafeAreaView>
+  // );
+
+  // IMAGE & BUTTON
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
       <View style={styles.container}>
@@ -47,7 +58,7 @@ export const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "skyblue",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
   },

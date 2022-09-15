@@ -11,8 +11,8 @@ export const JokeListScreen = ({ navigation, route }) => {
   const list = [
     {
       id: 0,
-      name: "Joke #1",
-      subtitle: "Answer #1",
+      name: "Why did the chicken cross the road?",
+      subtitle: "To show the squirrel that it could be done",
       count: 0,
     },
     {
