@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { HomeNavigator } from "../navigators/home.navigator";
-import { SettingsScreen } from "../screens/settings.screen";
+import { SettingsNavigator } from "../navigators/settings.navigator";
 
 import stemLogo from "../assets/stemLogo.png";
 
@@ -60,7 +60,7 @@ export const AppNavigator = () => {
     <NavigationContainer>
       <Tab.Navigator backBehavior="history" screenOptions={createScreenOptions}>
         <Tab.Screen name="Home" component={HomeNavigator} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="Settings" component={SettingsNavigator} />
       </Tab.Navigator>
     </NavigationContainer>
   );

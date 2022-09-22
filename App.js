@@ -1,12 +1,17 @@
 import * as React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 
+import { UserContextProvider } from "./context/user.context";
 import { AppNavigator } from "./navigators/app.navigator";
 
 // - - - - - - - - - - - - - - - - - - - -
 
 export default function App() {
-  return <AppNavigator />;
+  return (
+    <UserContextProvider>
+      <AppNavigator />
+    </UserContextProvider>
+  );
 }
 
 // - - - - - - - - - - - - - - - - - - - -
