@@ -20,19 +20,19 @@ export const SettingsScreen = ({ navigation }) => {
 
   // - - - - - - - - - -
 
-  // const usernameChanged = (username) => {
-  //   // console.log("settings.screen usernameChanged: ", username);
-  //   setUsername(username);
-  //   addUsername(username);
-  // };
+  const usernameChanged = (username) => {
+    // console.log("settings.screen usernameChanged: ", username);
+    setUsername(username);
+    addUsername(username);
+  };
 
   // - - - - - - - - - -
 
-  // const ageChanged = (age) => {
-  //   // console.log("settings.screen ageChanged: ", age);
-  //   setAge(age);
-  //   addAge(age);
-  // };
+  const ageChanged = (age) => {
+    //   // console.log("settings.screen ageChanged: ", age);
+    setAge(age);
+    addAge(age);
+  };
 
   // - - - - - - - - - -
 
@@ -52,40 +52,40 @@ export const SettingsScreen = ({ navigation }) => {
   // - - - - - - - - - -
 
   // INPUT x2
-  // return (
-  //   <SafeAreaView style={{ flex: 1, backgroundColor: "grey" }}>
-  //     <View style={styles.container}>
-  //       <Text style={styles.text}>Your name:</Text>
-  //       <TextInput
-  //         style={styles.input}
-  //         onChangeText={(value) => usernameChanged(value)}
-  //         value={user.name}
-  //         placeholder="Enter your name here"
-  //         keyboardType="default"
-  //       />
-  //       <TextInput
-  //         style={styles.input}
-  //         onChangeText={(value) => ageChanged(value)}
-  //         value={user.age}
-  //         placeholder="Enter your age here"
-  //         keyboardType="numeric"
-  //       />
-  //       <StatusBar style="auto" />
-  //     </View>
-  //   </SafeAreaView>
-  // );
-
-  // - - - - - - - - - -
-
-  // ORIGINAL
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "grey" }}>
       <View style={styles.container}>
-        <Text style={styles.text}>Settings</Text>
+        <Text style={styles.text}>Your name:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(value) => usernameChanged(value)}
+          value={user.name}
+          placeholder="Enter your name here"
+          keyboardType="default"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={(value) => ageChanged(value)}
+          value={user.age}
+          placeholder="Enter your age here"
+          keyboardType="numeric"
+        />
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
   );
+
+  // - - - - - - - - - -
+
+  // ORIGINAL
+  // return (
+  //   <SafeAreaView style={{ flex: 1, backgroundColor: "grey" }}>
+  //     <View style={styles.container}>
+  //       <Text style={styles.text}>Settings</Text>
+  //       <StatusBar style="auto" />
+  //     </View>
+  //   </SafeAreaView>
+  // );
 };
 
 // - - - - - - - - - -

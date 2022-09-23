@@ -31,10 +31,10 @@ export const HomeScreen = ({ navigation }) => {
   // - - - - - - - - - -
 
   // LOAD USER
-  // useEffect(() => {
-  //   console.log("home.screen[useEffect] triggered...");
-  //   loadUser();
-  // }, []);
+  useEffect(() => {
+    console.log("home.screen[useEffect] triggered...");
+    loadUser();
+  }, []);
 
   // - - - - - - - - - -
 
@@ -48,35 +48,16 @@ export const HomeScreen = ({ navigation }) => {
   // );
 
   // USER DISPLAYED
-  //   return (
-  //     <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
-  //       <View style={styles.container}>
-  //         {user.name ? (
-  //           <Text>
-  //             Welcome STEM student "{user.name}" (age {user.age})
-  //           </Text>
-  //         ) : (
-  //           <Text> </Text>
-  //         )}
-  //         <Text> </Text>
-  //         <Image source={stemLogo} style={{ width: 317, height: 309 }} />
-  //         <Text> </Text>
-  //         <Button
-  //           onPress={() => onJokeListPress()}
-  //           title="My Joke List"
-  //           buttonStyle={{ borderRadius: 8 }}
-  //           containerStyle={{ alignSelf: "center" }}
-  //         />
-  //         <StatusBar style="auto" />
-  //       </View>
-  //     </SafeAreaView>
-  //   );
-  // };
-
-  // IMAGE & BUTTON
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
       <View style={styles.container}>
+        {user.name ? (
+          <Text>
+            Welcome STEM student "{user.name}" (age {user.age})
+          </Text>
+        ) : (
+          <Text> </Text>
+        )}
         <Text> </Text>
         <Image source={stemLogo} style={{ width: 317, height: 309 }} />
         <Text> </Text>
@@ -91,6 +72,25 @@ export const HomeScreen = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+
+// IMAGE & BUTTON
+// return (
+//   <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+//     <View style={styles.container}>
+//       <Text> </Text>
+//       <Image source={stemLogo} style={{ width: 317, height: 309 }} />
+//       <Text> </Text>
+//       <Button
+//         onPress={() => onJokeListPress()}
+//         title="My Joke List"
+//         buttonStyle={{ borderRadius: 8 }}
+//         containerStyle={{ alignSelf: "center" }}
+//       />
+//       <StatusBar style="auto" />
+//     </View>
+//   </SafeAreaView>
+// );
+// };
 
 // - - - - - - - - - -
 
