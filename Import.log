@@ -1,0 +1,17 @@
+﻿Timestamp	Filename	Error	Message
+2022-09-28 21:12:17.968 -0400	StemDataSource.fmp12	0	Import operations started
+2022-09-28 21:12:17.969 -0400	StemDataSource.fmp12	0	Import of tables from clipboard started
+2022-09-28 21:12:17.971 -0400	StemDataSource.fmp12	0	Table “Jokes” imported as “Jokes 2” since a table or table occurrence named “Jokes” already exists.
+2022-09-28 21:12:17.973 -0400	Jokes 2	0	fields imported : 5
+2022-09-28 21:12:17.973 -0400	StemDataSource.fmp12	0	tables imported : 1
+2022-09-28 21:12:17.974 -0400	StemDataSource.fmp12	0	Import completed
+2022-09-28 21:12:38.334 -0400	StemDataSource.fmp12	0	Import operations committed
+2022-09-28 21:12:38.334 -0400	StemDataSource.fmp12	0	==================================================================
+2022-09-28 21:13:56.789 -0400	StemDataSource.fmp12	0	Import operations started
+2022-09-28 21:13:56.790 -0400	StemDataSource.fmp12	0	Import of tables from clipboard started
+2022-09-28 21:13:56.792 -0400	StemDataSource.fmp12	0	Table “Jokes” imported as “Jokes 2” since a table or table occurrence named “Jokes” already exists.
+2022-09-28 21:13:56.798 -0400	Jokes 2	0	fields imported : 8
+2022-09-28 21:13:56.798 -0400	StemDataSource.fmp12	0	tables imported : 1
+2022-09-28 21:13:56.798 -0400	StemDataSource.fmp12	0	Import completed
+2022-09-28 21:15:39.726 -0400	StemDataSource.fmp12	0	Import operations committed
+2022-09-28 21:15:39.726 -0400	StemDataSource.fmp12	0	==================================================================
