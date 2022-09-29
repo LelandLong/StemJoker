@@ -48,7 +48,7 @@ export const JokeListScreen = ({ navigation, route }) => {
   ];
 
   var whichList = [];
-  if (user.name === "Rerun") {
+  if (user.name === "Rerunx") {
     whichList = cloudData;
   } else {
     whichList = list;
@@ -59,7 +59,7 @@ export const JokeListScreen = ({ navigation, route }) => {
   const renderItem = ({ item }) => {
     return (
       <>
-        {user.name === "Rerun" ? (
+        {user.name === "Rerunx" ? (
           <ListItem
             containerStyle={{ backgroundColor: "white" }}
             topDivider

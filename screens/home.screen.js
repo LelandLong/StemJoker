@@ -40,16 +40,6 @@ export const HomeScreen = ({ navigation }) => {
 
   // - - - - - - - - - -
 
-  // return (
-  //   <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
-  //     <View style={styles.container}>
-  //       <Text>Hi, I'm the Home Screen</Text>
-  //       <StatusBar style="auto" />
-  //     </View>
-  //   </SafeAreaView>
-  // );
-
-  // USER DISPLAYED
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
       {isLoading ? (
@@ -80,25 +70,6 @@ export const HomeScreen = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
-// IMAGE & BUTTON
-// return (
-//   <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
-//     <View style={styles.container}>
-//       <Text> </Text>
-//       <Image source={stemLogo} style={{ width: 317, height: 309 }} />
-//       <Text> </Text>
-//       <Button
-//         onPress={() => onJokeListPress()}
-//         title="My Joke List"
-//         buttonStyle={{ borderRadius: 8 }}
-//         containerStyle={{ alignSelf: "center" }}
-//       />
-//       <StatusBar style="auto" />
-//     </View>
-//   </SafeAreaView>
-// );
-// };
 
 // - - - - - - - - - -
 
