@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   Text,
+  Button,
   SafeAreaView,
   FlatList,
 } from "react-native";
@@ -20,88 +21,56 @@ export const JokeListScreen = ({ navigation, route }) => {
 
   // - - - - - - - - - -
 
-  const list = [
-    {
-      id: 0,
-      name: "Why did the chicken cross the road?",
-      subtitle: "To show the squirrel that it could be done",
-      count: 0,
-    },
-    {
-      id: 1,
-      name: "Joke #2",
-      subtitle: "Answer #2",
-      count: 0,
-    },
-    {
-      id: 2,
-      name: "Joke #3",
-      subtitle: "Answer #3",
-      count: 0,
-    },
-    {
-      id: 3,
-      name: "Joke #4",
-      subtitle: "Answer #4",
-      count: 0,
-    },
-  ];
+  const onAdd = () => {
+    console.log("add btn pressed...");
+  };
 
-  var whichList = [];
-  if (user.name === "Rerunx") {
-    whichList = cloudData;
-  } else {
-    whichList = list;
-  }
+  // - - - - - - - - - -
+
+  const onPressed = (item) => {
+    // console.log("joke item pressed, item: ", item);
+    console.log("joke item pressed, id: ", item.fieldData.id);
+  };
 
   // - - - - - - - - - -
 
   const renderItem = ({ item }) => {
     return (
-      <>
-        {user.name === "Rerunx" ? (
-          <ListItem
-            containerStyle={{ backgroundColor: "white" }}
-            topDivider
-            bottomDivider
+      <ListItem
+        containerStyle={{ backgroundColor: "white" }}
+        topDivider
+        bottomDivider
+        onPress={() => onPressed(item)}
+      >
+        <ListItem.Content>
+          <ListItem.Title style={{ color: "black", fontWeight: "bold" }}>
+            <Text>{item.fieldData["FirstLine"]}</Text>
+          </ListItem.Title>
+          <Text
+            style={{
+              color: "red",
+              fontWeight: "bold",
+              alignSelf: "flex-end",
+            }}
           >
-            <ListItem.Content>
-              <ListItem.Title style={{ color: "black", fontWeight: "bold" }}>
-                <Text>{item.fieldData["zipcode"]}</Text>
-              </ListItem.Title>
-              <ListItem.Subtitle style={{ color: "black" }}>
-                <Text>{item.fieldData["city_primary"]}</Text>
-              </ListItem.Subtitle>
-            </ListItem.Content>
-          </ListItem>
-        ) : (
-          <ListItem
-            containerStyle={{ backgroundColor: "white" }}
-            topDivider
-            bottomDivider
-          >
-            <ListItem.Content>
-              <ListItem.Title style={{ color: "black", fontWeight: "bold" }}>
-                <Text>{item.name}</Text>
-              </ListItem.Title>
-              <Text
-                style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  alignSelf: "flex-end",
-                }}
-              >
-                {item.count}
-              </Text>
-              <ListItem.Subtitle style={{ color: "black" }}>
-                <Text>{item.subtitle}</Text>
-              </ListItem.Subtitle>
-            </ListItem.Content>
-          </ListItem>
-        )}
-      </>
+            {item.fieldData["Votes::sCount"]}
+          </Text>
+          <ListItem.Subtitle style={{ color: "black" }}>
+            <Text>{item.fieldData["SecondLine"]}</Text>
+          </ListItem.Subtitle>
+        </ListItem.Content>
+      </ListItem>
     );
   };
+
+  // - - - - - - - - - -
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Jokes",
+      headerRight: () => <Button onPress={() => onAdd()} title="Add" />,
+    });
+  }, [navigation]);
 
   // - - - - - - - - - -
 
@@ -114,7 +83,7 @@ export const JokeListScreen = ({ navigation, route }) => {
       ) : (
         <FlatList
           keyExtractor={(item, index) => index.toString()}
-          data={whichList}
+          data={cloudData}
           renderItem={renderItem}
         />
       )}

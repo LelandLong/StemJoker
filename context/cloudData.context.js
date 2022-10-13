@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { requestTokenFromFMS } from "../communication/requestToken";
 import { requestTestDataFromFMS } from "../communication/requestTestData";
+import { requestDataFromFMS } from "../communication/requestData";
 import { requestLogoutFromFMS } from "../communication/requestLogout";
 
 // - - - - - - - - - - - - - - - - - - - -
@@ -123,12 +124,88 @@ export const CloudDataContextProvider = ({ children }) => {
 
   // - - - - - - - - - -
 
+  const onRequestData = (server, username) => {
+    console.log("cloudDataContext.onRequestData launched...");
+
+    setIsLoading(true);
+    requestTokenFromFMS()
+      .then((fmsResult) => {
+        const theToken = fmsResult.response.token;
+        console.log("cloudDataContext.onRequestData token: ", theToken);
+
+        requestDataFromFMS(theToken)
+          .then((response) => {
+            var tempList = [];
+            const scriptResult = JSON.parse(response.response.scriptResult);
+            const queryStatus = scriptResult.messages[0].code;
+
+            if (queryStatus === "0") {
+              const queryFoundCount = scriptResult.response
+                ? scriptResult.response.dataInfo.foundCount
+                : 0;
+              const queryReturnedCount = scriptResult.response
+                ? scriptResult.response.dataInfo.returnedCount
+                : 0;
+              console.log(
+                "cloudDataContext.onRequestData queryStatus: ",
+                queryStatus,
+                "; queryFoundCount: ",
+                queryFoundCount,
+                "; queryReturnedCount: ",
+                queryReturnedCount
+              );
+
+              setCloudData(scriptResult.response.data);
+              //   saveProjectList(scriptResult.response.data);
+            } else {
+              console.log(
+                "onRequestData FMS ERROR CODE: ",
+                queryStatus,
+                "; message: ",
+                scriptResult.messages[0].message
+              );
+            }
+
+            requestLogoutFromFMS(theToken)
+              .then((result) => {
+                setIsLoading(false);
+                console.log(
+                  "projectsContext.onLogout result: ",
+                  result.messages[0].message
+                );
+              })
+              .catch((err) => {
+                setIsLoading(false);
+                console.log("cloudDataContext.onLogout error: ", err);
+              });
+          })
+          .catch((err) => {
+            setIsLoading(false);
+            console.log("cloudDataContext.onRequestData error: ", err);
+          });
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log("cloudDataContext.onRequestData error: ", err);
+        if (err.messages[0].code == 502) {
+          console.log(
+            "cloudDataContext.onRequestData errorCode=502 routing..."
+          );
+          //   setTryingAgain(true);
+          //   setTries(tries + 1);
+        }
+      });
+  };
+
+  // - - - - - - - - - -
+
   return (
     <CloudDataContext.Provider
       value={{
         cloudData,
         isLoading,
         onRequestTestData,
+        onRequestData,
       }}
     >
       {children}

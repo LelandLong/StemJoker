@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from "react";
 import { Button, ActivityIndicator } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Text, SafeAreaView, Image } from "react-native";
-import { JokeListNavigator } from "../navigators/jokeList.navigator";
 import { UserContext } from "../context/user.context";
 import { CloudDataContext } from "../context/cloudData.context";
 
