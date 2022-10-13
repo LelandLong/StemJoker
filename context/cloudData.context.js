@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { requestTokenFromFMS } from "../communication/requestToken";
 import { requestTestDataFromFMS } from "../communication/requestTestData";
@@ -192,6 +193,7 @@ export const CloudDataContextProvider = ({ children }) => {
           console.log(
             "cloudDataContext.onRequestData errorCode=502 routing..."
           );
+          Alert.alert("Sorry but the server was too busy. Try again.");
           //   setTryingAgain(true);
           //   setTries(tries + 1);
         }
@@ -257,6 +259,7 @@ export const CloudDataContextProvider = ({ children }) => {
           console.log(
             "cloudDataContext.onSendNewJoke errorCode=502 routing..."
           );
+          Alert.alert("Sorry but the server was too busy. Try again.");
           //   setTryingAgain(true);
           //   setTries(tries + 1);
         }

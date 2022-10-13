@@ -15,8 +15,8 @@ export const SettingsScreen = ({ navigation }) => {
 
   const usernameChanged = (username) => {
     // console.log("settings.screen usernameChanged: ", username);
-    setUsername(username);
-    addUsername(username);
+    // setUsername(username);
+    // addUsername(username);
   };
 
   // - - - - - - - - - -

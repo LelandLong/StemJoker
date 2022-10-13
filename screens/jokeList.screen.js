@@ -52,9 +52,7 @@ export const JokeListScreen = ({ navigation, route }) => {
               fontWeight: "bold",
               alignSelf: "flex-end",
             }}
-          >
-            {item.fieldData["Votes::sCount"]}
-          </Text>
+          ></Text>
           <ListItem.Subtitle style={{ color: "black" }}>
             <Text>{item.fieldData["SecondLine"]}</Text>
           </ListItem.Subtitle>
@@ -66,10 +64,17 @@ export const JokeListScreen = ({ navigation, route }) => {
   // - - - - - - - - - -
 
   useLayoutEffect(() => {
-    navigation.setOptions({
-      title: "Jokes",
-      headerRight: () => <Button onPress={() => onAdd()} title="Add" />,
-    });
+    if (user.name === "Rerun") {
+      navigation.setOptions({
+        title: "Jokes",
+        headerRight: () => <Button onPress={() => onAdd()} title="Add" />,
+      });
+    } else {
+      navigation.setOptions({
+        title: "Jokes",
+        headerRight: null,
+      });
+    }
   }, [navigation]);
 
   // - - - - - - - - - -

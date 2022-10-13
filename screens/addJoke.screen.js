@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useLayoutEffect, useEffect, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
+  Alert,
+  ActivityIndicator,
   StyleSheet,
   View,
   Text,
@@ -16,9 +18,10 @@ import { CloudDataContext } from "../context/cloudData.context";
 
 export const AddJokeScreen = ({ navigation }) => {
   const { user } = useContext(UserContext);
-  const { onSendNewJoke } = useContext(CloudDataContext);
+  const { onSendNewJoke, isLoading } = useContext(CloudDataContext);
   const [firstLine, setFirstLine] = useState("");
   const [secondLine, setSecondLine] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   // - - - - - - - - - -
 
@@ -37,21 +40,36 @@ export const AddJokeScreen = ({ navigation }) => {
   // - - - - - - - - - -
 
   const onSave = () => {
-    const scriptParams = {
-      username: user.name,
-      firstLine: firstLine,
-      secondLine: secondLine,
-    };
-    console.log("AddJokeScreen onSave, scriptParams: ", scriptParams);
-    onSendNewJoke(scriptParams);
-    navigation.goBack();
+    if (firstLine === "" || secondLine === "") {
+      Alert.alert("Sorry but both lines need to NOT be empty.");
+    } else {
+      setIsSaving(true);
+      const scriptParams = {
+        username: user.name,
+        firstLine: firstLine,
+        secondLine: secondLine,
+      };
+      console.log("AddJokeScreen onSave, scriptParams: ", scriptParams);
+      onSendNewJoke(scriptParams);
+    }
   };
 
   // - - - - - - - - - -
 
-  // HEADER TITLE
   useEffect(() => {
-    navigation.setOptions({ title: "Add Joke" });
+    if (!isLoading && isSaving) {
+      setIsSaving(false);
+      navigation.goBack();
+    }
+  }, [isLoading]);
+
+  // - - - - - - - - - -
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Jokes",
+      headerRight: null,
+    });
   }, [navigation]);
 
   // - - - - - - - - - -
@@ -74,7 +92,13 @@ export const AddJokeScreen = ({ navigation }) => {
           placeholder="Second line"
           keyboardType="default"
         />
-        <Button onPress={() => onSave()} title="Save" />
+        {isLoading ? (
+          <View>
+            <ActivityIndicator size="large" />
+          </View>
+        ) : (
+          <Button onPress={() => onSave()} title="Save" />
+        )}
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
