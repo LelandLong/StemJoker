@@ -1,13 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  SafeAreaView,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, Text, TextInput, SafeAreaView } from "react-native";
 
 import { UserContext } from "../context/user.context";
 

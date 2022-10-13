@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SettingsScreen } from "../screens/settings.screen";
 

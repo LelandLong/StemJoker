@@ -1,5 +1,4 @@
 import * as React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
 
 import { UserContextProvider } from "./context/user.context";
 import { CloudDataContextProvider } from "./context/cloudData.context";
@@ -16,14 +15,3 @@ export default function App() {
     </UserContextProvider>
   );
 }
-
-// - - - - - - - - - - - - - - - - - - - -
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

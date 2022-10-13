@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Button } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeScreen } from "../screens/home.screen";
 import { JokeListScreen } from "../screens/jokeList.screen";
-import { UserContext } from "../context/user.context";
+import { AddJokeScreen } from "../screens/addJoke.screen";
 import { CloudDataContext } from "../context/cloudData.context";
 
 // - - - - - - - - - - - - - - - - - - - -
@@ -13,8 +13,7 @@ const HomeStack = createNativeStackNavigator();
 // - - - - - - - - - -
 
 export const HomeNavigator = () => {
-  const { user } = useContext(UserContext);
-  const { onRequestTestData, onRequestData } = useContext(CloudDataContext);
+  const { onRequestData } = useContext(CloudDataContext);
 
   // - - - - - - - - - -
 
@@ -29,6 +28,7 @@ export const HomeNavigator = () => {
     >
       <HomeStack.Screen name="HomeForJokesScreen" component={HomeScreen} />
       <HomeStack.Screen name="Joke List" component={JokeListScreen} />
+      <HomeStack.Screen name="Add Joke" component={AddJokeScreen} />
     </HomeStack.Navigator>
   );
 };

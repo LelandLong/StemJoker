@@ -4,6 +4,7 @@ import { requestTokenFromFMS } from "../communication/requestToken";
 import { requestTestDataFromFMS } from "../communication/requestTestData";
 import { requestDataFromFMS } from "../communication/requestData";
 import { requestLogoutFromFMS } from "../communication/requestLogout";
+import { sendNewJoke } from "../communication/sendNewJoke";
 
 // - - - - - - - - - - - - - - - - - - - -
 
@@ -49,7 +50,7 @@ export const CloudDataContextProvider = ({ children }) => {
     }
   }; // - - - - - - - - - -
 
-  const onRequestTestData = (server, username) => {
+  const onRequestTestData = () => {
     console.log("cloudDataContext.onRequestTestData launched...");
 
     setIsLoading(true);
@@ -124,7 +125,7 @@ export const CloudDataContextProvider = ({ children }) => {
 
   // - - - - - - - - - -
 
-  const onRequestData = (server, username) => {
+  const onRequestData = () => {
     console.log("cloudDataContext.onRequestData launched...");
 
     setIsLoading(true);
@@ -199,6 +200,71 @@ export const CloudDataContextProvider = ({ children }) => {
 
   // - - - - - - - - - -
 
+  const onSendNewJoke = (scriptParams) => {
+    console.log("cloudDataContext.onSendNewJoke launched...");
+
+    setIsLoading(true);
+    requestTokenFromFMS()
+      .then((fmsResult) => {
+        const theToken = fmsResult.response.token;
+        console.log("cloudDataContext.onSendNewJoke token: ", theToken);
+
+        const newParams = { token: theToken, params: scriptParams };
+        sendNewJoke(newParams)
+          .then((response) => {
+            // console.log("cloudDataContext.onSendNewJoke response: ", response);
+            const scriptResult = response.response.scriptResult;
+
+            if (scriptResult === "success") {
+              console.log(
+                "cloudDataContext.onSendNewJoke scriptResult: ",
+                scriptResult
+              );
+
+              onRequestData();
+              //
+            } else {
+              console.log(
+                "onSendNewJoke FMS ERROR CODE: ",
+                scriptResult,
+                "; message: ",
+                scriptResult.messages[0].message
+              );
+            }
+
+            requestLogoutFromFMS(theToken)
+              .then((result) => {
+                setIsLoading(false);
+                console.log(
+                  "projectsContext.onLogout result: ",
+                  result.messages[0].message
+                );
+              })
+              .catch((err) => {
+                setIsLoading(false);
+                console.log("cloudDataContext.onLogout error: ", err);
+              });
+          })
+          .catch((err) => {
+            setIsLoading(false);
+            console.log("cloudDataContext.onSendNewJoke error: ", err);
+          });
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log("cloudDataContext.onSendNewJoke error: ", err);
+        if (err.messages[0].code == 502) {
+          console.log(
+            "cloudDataContext.onSendNewJoke errorCode=502 routing..."
+          );
+          //   setTryingAgain(true);
+          //   setTries(tries + 1);
+        }
+      });
+  };
+
+  // - - - - - - - - - -
+
   return (
     <CloudDataContext.Provider
       value={{
@@ -206,6 +272,7 @@ export const CloudDataContextProvider = ({ children }) => {
         isLoading,
         onRequestTestData,
         onRequestData,
+        onSendNewJoke,
       }}
     >
       {children}

@@ -1,5 +1,4 @@
-import React, { useState, useContext, useLayoutEffect } from "react";
-import { StatusBar } from "expo-status-bar";
+import React, { useContext, useLayoutEffect } from "react";
 import {
   ActivityIndicator,
   StyleSheet,
@@ -23,6 +22,7 @@ export const JokeListScreen = ({ navigation, route }) => {
 
   const onAdd = () => {
     console.log("add btn pressed...");
+    navigation.navigate("Add Joke");
   };
 
   // - - - - - - - - - -
