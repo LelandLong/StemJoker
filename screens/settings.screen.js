@@ -18,7 +18,7 @@ export const SettingsScreen = ({ navigation }) => {
     // setUsername(username);
     // addUsername(username);
   };
-
+  //
   // - - - - - - - - - -
 
   const ageChanged = (age) => {

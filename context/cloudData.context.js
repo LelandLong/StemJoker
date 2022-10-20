@@ -6,6 +6,7 @@ import { requestTestDataFromFMS } from "../communication/requestTestData";
 import { requestDataFromFMS } from "../communication/requestData";
 import { requestLogoutFromFMS } from "../communication/requestLogout";
 import { sendNewJoke } from "../communication/sendNewJoke";
+import { sendNewVote } from "../communication/sendNewVote";
 
 // - - - - - - - - - - - - - - - - - - - -
 
@@ -156,6 +157,10 @@ export const CloudDataContextProvider = ({ children }) => {
                 "; queryReturnedCount: ",
                 queryReturnedCount
               );
+              console.log(
+                "cloudDataContext.onRequestData, response: ",
+                scriptResult.response.data
+              );
 
               setCloudData(scriptResult.response.data);
               //   saveProjectList(scriptResult.response.data);
@@ -268,6 +273,80 @@ export const CloudDataContextProvider = ({ children }) => {
 
   // - - - - - - - - - -
 
+  const onSendNewVote = (scriptParams) => {
+    console.log("cloudDataContext.onSendNewVote launched...");
+
+    setIsLoading(true);
+    requestTokenFromFMS()
+      .then((fmsResult) => {
+        const theToken = fmsResult.response.token;
+        console.log("cloudDataContext.onSendNewVote token: ", theToken);
+
+        const newParams = { token: theToken, params: scriptParams };
+        sendNewVote(newParams)
+          .then((response) => {
+            // console.log("cloudDataContext.onSendNewVote response: ", response);
+            const scriptResult = response.response.scriptResult;
+
+            if (scriptResult === "success") {
+              console.log(
+                "cloudDataContext.onSendNewVote scriptResult: ",
+                scriptResult
+              );
+
+              Alert.alert("Vote registered.");
+              // onRequestData();
+              //
+            } else if (scriptResult === "error: already voted") {
+              console.log(
+                "onSendNewVote FMS error: already voted: ",
+                scriptResult
+              );
+              Alert.alert("Sorry, can only vote once per joke.");
+              //
+            } else {
+              console.log(
+                "onSendNewVote FMS ERROR CODE: ",
+                scriptResult,
+                "; message: ",
+                scriptResult.messages[0].message
+              );
+            }
+
+            requestLogoutFromFMS(theToken)
+              .then((result) => {
+                setIsLoading(false);
+                console.log(
+                  "projectsContext.onLogout result: ",
+                  result.messages[0].message
+                );
+              })
+              .catch((err) => {
+                setIsLoading(false);
+                console.log("cloudDataContext.onLogout error: ", err);
+              });
+          })
+          .catch((err) => {
+            setIsLoading(false);
+            console.log("cloudDataContext.onSendNewVote error: ", err);
+          });
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log("cloudDataContext.onSendNewVote error: ", err);
+        if (err.messages[0].code == 502) {
+          console.log(
+            "cloudDataContext.onSendNewVote errorCode=502 routing..."
+          );
+          Alert.alert("Sorry but the server was too busy. Try again.");
+          //   setTryingAgain(true);
+          //   setTries(tries + 1);
+        }
+      });
+  };
+
+  // - - - - - - - - - -
+
   return (
     <CloudDataContext.Provider
       value={{
@@ -276,6 +355,7 @@ export const CloudDataContextProvider = ({ children }) => {
         onRequestTestData,
         onRequestData,
         onSendNewJoke,
+        onSendNewVote,
       }}
     >
       {children}

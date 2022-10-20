@@ -16,7 +16,7 @@ import { CloudDataContext } from "../context/cloudData.context";
 
 export const JokeListScreen = ({ navigation, route }) => {
   const { user } = useContext(UserContext);
-  const { cloudData, isLoading } = useContext(CloudDataContext);
+  const { onSendNewVote, cloudData, isLoading } = useContext(CloudDataContext);
 
   // - - - - - - - - - -
 
@@ -30,11 +30,18 @@ export const JokeListScreen = ({ navigation, route }) => {
   const onPressed = (item) => {
     // console.log("joke item pressed, item: ", item);
     console.log("joke item pressed, id: ", item.fieldData.id);
+    const scriptParams = {
+      username: user.name,
+      jokeId: item.fieldData.id,
+    };
+    console.log("JokeListScreen onPressed, scriptParams: ", scriptParams);
+    onSendNewVote(scriptParams);
   };
 
   // - - - - - - - - - -
 
   const renderItem = ({ item }) => {
+    // {item.fieldData["Votes::sCount"]}
     return (
       <ListItem
         containerStyle={{ backgroundColor: "white" }}
@@ -52,7 +59,9 @@ export const JokeListScreen = ({ navigation, route }) => {
               fontWeight: "bold",
               alignSelf: "flex-end",
             }}
-          ></Text>
+          >
+            {" "}
+          </Text>
           <ListItem.Subtitle style={{ color: "black" }}>
             <Text>{item.fieldData["SecondLine"]}</Text>
           </ListItem.Subtitle>
@@ -64,17 +73,10 @@ export const JokeListScreen = ({ navigation, route }) => {
   // - - - - - - - - - -
 
   useLayoutEffect(() => {
-    if (user.name === "Rerun") {
-      navigation.setOptions({
-        title: "Jokes",
-        headerRight: () => <Button onPress={() => onAdd()} title="Add" />,
-      });
-    } else {
-      navigation.setOptions({
-        title: "Jokes",
-        headerRight: null,
-      });
-    }
+    navigation.setOptions({
+      title: "Jokes",
+      headerRight: () => <Button onPress={() => onAdd()} title="Add" />,
+    });
   }, [navigation]);
 
   // - - - - - - - - - -

@@ -20,33 +20,18 @@ export const HomeNavigator = () => {
   // - - - - - - - - - -
 
   return (
-    <>
-      {user.name === "Rerun" ? (
-        <HomeStack.Navigator
-          screenOptions={{
-            headerShown: true,
-            headerRight: () => (
-              <Button onPress={() => onRequestData()} title="Load" />
-            ),
-          }}
-        >
-          <HomeStack.Screen name="HomeForJokesScreen" component={HomeScreen} />
-          <HomeStack.Screen name="Joke List" component={JokeListScreen} />
-          <HomeStack.Screen name="Add Joke" component={AddJokeScreen} />
-        </HomeStack.Navigator>
-      ) : (
-        <HomeStack.Navigator
-          screenOptions={{
-            headerShown: true,
-            headerRight: () => null,
-          }}
-        >
-          <HomeStack.Screen name="HomeForJokesScreen" component={HomeScreen} />
-          <HomeStack.Screen name="Joke List" component={JokeListScreen} />
-          <HomeStack.Screen name="Add Joke" component={AddJokeScreen} />
-        </HomeStack.Navigator>
-      )}
-    </>
+    <HomeStack.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerRight: () => (
+          <Button onPress={() => onRequestData()} title="Load" />
+        ),
+      }}
+    >
+      <HomeStack.Screen name="HomeForJokesScreen" component={HomeScreen} />
+      <HomeStack.Screen name="Joke List" component={JokeListScreen} />
+      <HomeStack.Screen name="Add Joke" component={AddJokeScreen} />
+    </HomeStack.Navigator>
   );
 };
 
